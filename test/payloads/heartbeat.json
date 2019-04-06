@@ -1,0 +1,24 @@
+[
+  {
+    "eventType": "heartbeat",
+    "type": "com.microservices.node.template",
+    "specversion": "0.2",
+    "source": "/my-source",
+    "id": "NODE-TEMPLATE-0",
+    "datacontenttype": "application/json",
+    "data": {
+      "user": "max"
+    }
+  },
+  {
+    "eventType": "heartbeat",
+    "type": "com.microservices.node.template",
+    "specversion": "0.2",
+    "source": "/my-source",
+    "id": "NODE-TEMPLATE-1",
+    "datacontenttype": "application/json",
+    "data": {
+      "user": "moritz"
+    }
+  }
+]
