@@ -1,0 +1,56 @@
+# Documentation: https://microservice.guide
+omg: 1
+info:
+  version: 1.0.0
+  title: Your microservice
+  description: Describe your microservice
+  license:
+    name: Apache 2.0
+    url: https://opensource.org/licenses/Apache-2.0
+lifecycle:
+  startup:
+    command: ["node", "/app/src/index.js"]
+actions:
+  listen:
+    help: Subscribe to events
+    events:
+      heartbeat:
+        help: Subscribe to heartbeat events from different users
+        http:
+          port: 8080
+          subscribe:
+            path: /events
+            method: post
+            contentType: application/json
+        arguments:
+          user:
+            type: string
+            in: requestBody
+        output:
+          type: object
+          contentType: application/json
+          properties:
+            user:
+              type: string
+            time:
+              type: data
+  publish:
+    help: Publish an event to your service
+    arguments:
+      eventName:
+        type: string
+        in: requestBody
+        required: true
+      user:
+        help: Select to which user to send the event
+        type: string
+        in: requestBody
+      data:
+        type: map
+        in: requestBody
+        required: true
+    http:
+      port: 8080
+      method: post
+      contentType: application/json
+      path: /publish
