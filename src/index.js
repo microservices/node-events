@@ -9,15 +9,6 @@ const router = require('koa-router')();
 const app = new Koa();
 const port = 8080;
 
-var hostIP = "";
-// Workaround for https://github.com/microservices/omg-cli/issues/181
-cp.exec("ip -4 route list match 0/0", (e, stdout, stderr) => {
-  hostIP = stdout.split(" ")[2];
-});
-function normalize(url) {
-  return url.replace("host.docker.internal", hostIP);
-}
-
 // A simple manager which tracks all event subscriptions
 class Manager {
   constructor() {
@@ -81,7 +72,7 @@ class Manager {
     See also: https://github.com/cloudevents/spec/blob/master/json-format.md
    */
   _sendEvent(node, eventName, eventData) {
-    return request.post(normalize(node.endpoint), {
+    return request.post(node.endpoint, {
       json: {
         eventType: eventName,
         type: 'com.microservices.node.template',
@@ -104,15 +95,19 @@ router.post('/events', (ctx, next) => {
   ctx.body = {success: manager.subscribe(id, endpoint, event, data)};
 });
 
-router.delete('/events', (ctx, next) => {
+router.delete('/events', ctx => {
   const { id, event } = ctx.request.body;
   ctx.body = {success: manager.unsubscribe(id, event)};
 });
 
-router.post('/publish', (ctx, next) => {
+router.post('/publish', ctx => {
   const { eventName, user, data } = ctx.request.body;
   data.user = user;
   ctx.body = {success: manager.publish(eventName, data)};
+});
+
+router.get('/health', ctx => {
+  ctx.body = 'OK';
 });
 
 // heartbeat events
