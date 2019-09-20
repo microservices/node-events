@@ -56,7 +56,11 @@ actions:
         in: requestBody
         required: true
     output:
-      type: any
+      type: object
+      contentType: application/json
+      properties:
+        success:
+          type: boolean
     http:
       port: 8080
       method: post
