@@ -3,7 +3,7 @@
 ![Microservice](https://img.shields.io/badge/microservice-ready-brightgreen.svg?style=for-the-badge)
 [![Build status](https://img.shields.io/travis/com/microservices/node-events/master.svg?style=for-the-badge)](https://travis-ci.com/microservices/node-events)
 
-An OMG template for NodeJS with subscription endpoints.
+An OMS template for NodeJS with subscription endpoints.
 
 Usage
 -----
@@ -42,10 +42,10 @@ Test
 ### Subscribe to all user events
 
 ```sh
-> omg subscribe listen heartbeat
+> oms subscribe listen heartbeat
 ℹ Building Docker image
 …
-✔ Built Docker image with name: omg/microservices/node-events
+✔ Built Docker image with name: oms/microservices/node-events
 ✔ Started Docker container: 7be7d3cc4da6
 ✔ Health check passed
 ✔ Ran action: `listen` with output:
@@ -83,10 +83,10 @@ Test
 ### Subscribe to all individual user events
 
 ```sh
-> omg subscribe listen heartbeat -a user='max'
+> oms subscribe listen heartbeat -a user='max'
 ℹ Building Docker image
 …
-✔ Built Docker image with name: omg/microservices/node-events
+✔ Built Docker image with name: oms/microservices/node-events
 ✔ Started Docker container: 5d2592cbd82b
 ✔ Health check passed
 ✔ Ran action: `listen` with output:
