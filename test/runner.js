@@ -10,8 +10,6 @@ const { spawn } = require('child_process');
 const { basename } = require('path');
 const { readFileSync } = require('fs');
 
-const lastMessage = '✔ Subscribed to event: `heartbeat` data will be posted to this terminal window when appropriate';
-
 const payloadFile = process.argv[2];
 console.log(`Opening payloadFile: ${payloadFile}`);
 const payloads = JSON.parse(readFileSync(payloadFile));
@@ -20,7 +18,7 @@ const payloads = JSON.parse(readFileSync(payloadFile));
 const actions = basename(payloadFile).split('.')[0].split('_');
 
 function test(cb) {
-  const args = ['oms', 'subscribe', 'listen', ...actions];
+  const args = ['oms', 'subscribe', '--silent', 'listen', ...actions];
   console.log(`Spawn: ${args.join(' ')}`);
   const oms = spawn('npx', args);
   oms.stdout.on('data', (data) => {
@@ -28,12 +26,8 @@ function test(cb) {
   });
   oms.stderr.on('data', (data) => {
     process.stdout.write(data);
-    if (data.includes(lastMessage)){
-      cb(oms);
-    }
   });
-  oms.on('close', (code) => {
-  });
+  cb(oms);
 }
 
 test(function(oms){
