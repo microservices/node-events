@@ -37,7 +37,7 @@ actions:
             user:
               type: string
             time:
-              type: data
+              type: string
   publish:
     help: Publish an event to your service
     arguments:
@@ -58,3 +58,5 @@ actions:
       method: post
       contentType: application/json
       path: /publish
+    output:
+      type: none
