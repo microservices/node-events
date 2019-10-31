@@ -12,9 +12,9 @@ const runner = join(__dirname, 'runner.js');
 readdirSync(payloadDir).forEach(payload => {
   const file = join(payloadDir, payload);
   console.log(`Testing: ${payload}`);
-  const omg = spawnSync('node', [runner, file], {
+  const oms = spawnSync('node', [runner, file], {
     stdio: [process.stdin, process.stdout, process.stderr],
   });
-  assert(omg.status === 0);
-  assert(omg.error === undefined);
+  assert(oms.status === 0);
+  assert(oms.error === undefined);
 });

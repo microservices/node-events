@@ -1,5 +1,5 @@
 {
-  "name": "omg-node-template",
+  "name": "oms-node-template",
   "version": "0.0.1",
   "description": "Your awesome microservice",
   "main": "src/index.js",
@@ -19,7 +19,7 @@
   "homepage": "https://github.com/microservices/node#readme",
   "keywords": [
     "microservice",
-    "omg"
+    "oms"
   ],
   "dependencies": {
     "koa": "^2.7.0",
